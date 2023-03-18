@@ -35,24 +35,3 @@ cmd
 55
 Отгадано число 55
 ```
-Для решения задачи воспользуйтесь модулем [readline](https://nodejs.org/api/readline.html).
-
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
-
-async function processValue(value) {
-  return new Promise((resolve) => {
-    // Perform some async operation on value.
-    setTimeout(() => {
-      return resolve(value)
-    }, 1000)
-  })
-}
-
-console.info('start')
-await yargs(hideBin(process.argv))
-  .command('add <x> <y>', 'add two eventual values', () => {}, async (argv) => {
-    const sum = await processValue(argv.x) + await processValue(argv.y)
-    console.info(`x + y = ${sum}`)
-  }).parse()
-console.info('finish')
