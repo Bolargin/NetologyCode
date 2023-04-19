@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {//получить книгу по **id** | п
         res.json(book[indx])
     }else{
         res.status(404)
-        res.json({errcode:404, error: "Not found"});
+        res.json({errcode:404, error: "Not found"})
     }
 })
 
@@ -72,7 +72,7 @@ router.put('/:id', (req, res) => { //редактировать книгу по 
         res.json(book[indx])
     }else{
         res.status(404)
-        res.json({errcode:404, error: "Not found"});
+        res.json({errcode:404, error: "Not found"})
     }
 })
 
@@ -86,29 +86,39 @@ router.delete('/:id', (req, res) => { //удалить книгу по **id** | 
         res.json('ok')
     } else {
         res.status(404)
-        res.json({errcode:404, error: "Not found"});
+        res.json({errcode:404, error: "Not found"})
     }
 })
-
 router.get('/:id/download', (req, res) => { //отдать на скачиваение файл книги по её **:id**
     const {book} = library
     const {id} = req.params
     const indx = book.findIndex(el => el.id === id)
-    console.log(__dirname + "\\public\\books\\"+ book[indx].fileBook)
     if( indx !== -1){
-        express.static(__dirname + "\\public\\books\\"+ book[indx].fileBook)
+        const file = `${__dirname}/../public/books/${book[indx].fileBook}`
+        res.download(file);
     }else{
         res.status(404)
-        res.json({errcode:404, error: "Not found"});
+        res.json({errcode:404, error: "Not found"})
     }
 })
 
-router.post('/upload', fileMulter.single('004.txt'), (req, res) => {
-        if(req.file){
-            const {path} = req.file
-            res.json({path})
-        }
-        res.json()
-    })
-
+router.post('/:id/upload', (req, res) => {
+    const {book} = library
+    const {id} = req.params
+    const indx = book.findIndex(el => el.id === id)
+    if( indx !== -1){
+        var upload = fileMulter.single(book[indx].fileName)
+        upload(req, res, function(err) {
+            if (err) {
+                console.log('Upload error')
+                return
+            }
+            book[indx].fileBook = req.file.path
+            res.json(book[indx].fileBook)
+        })
+    }else{
+        res.status(404)
+        res.json({errcode:404, error: "Not found"})
+    }
+})
 module.exports = router
