@@ -1,0 +1,19 @@
+{
+  "name": "008-ejs",
+  "version": "1.0.0",
+  "description": "Обновить структуру роутинга проекта с использованием **express.Router()**.\r Установить в проект пакет **multer**\r https://github.com/expressjs/multer/blob/master/doc/README-ru.md\r и создать middleware для загрузки файла книги. \r Созданную middleware подключить и обработать в роутах создания данных о книге.\r Каждый экземпляр книги должен содержать следующую структуру данных:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.0"
+  },
+  "keywords": []
+}
