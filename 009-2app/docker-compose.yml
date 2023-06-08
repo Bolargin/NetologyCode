@@ -1,0 +1,20 @@
+services:
+  storage:
+    image: redis
+    volumes:
+      - ./data:/data
+  counter:
+    build: ./counter
+    environment:
+      - PORT=3001
+      - REDIS_URL=redis://storage
+    ports:
+      - 3001:3001
+    depends_on:
+      - storage
+  library:
+    build: ./library
+    environment:
+      - PORT=3000
+    ports:
+      - 80:3000
