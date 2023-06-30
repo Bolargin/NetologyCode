@@ -1,0 +1,13 @@
+<%- include('../port/main-start', {title: title}) %>
+<%- include('../port/menu') %>
+<h1><%= title %></h1>
+<div class="row">
+    <div class="col-sm-6">
+        <form method="POST" enctype="multipart/form-data">
+            <label>Файл</label><br>
+            <input type="file" name="filedata" /><br><br>
+            <input type="submit" value="Отправить" />
+        </form>
+    </div>
+</div>
+<%- include('../port/main-end') %>
