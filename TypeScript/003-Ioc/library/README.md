@@ -6,7 +6,7 @@ NetologyCode\TypeScript\003-IoC\library\source\container.js
 
 #### 2. Добавьте сервис `BooksRepository` из предыдущего задания в IoC-контейнер.
 
-NetologyCode\TypeScript\003-IoC\library\source\container.js
+NetologyCode\TypeScript\003-IoC\library\source\container.js  
 NetologyCode\TypeScript\003-IoC\library\source\interfaces.js
 
 #### 3. Воспользуйтесь IoC-контейнером в обработчиках запросов `express.js`, чтобы получить `BooksRepository`.
