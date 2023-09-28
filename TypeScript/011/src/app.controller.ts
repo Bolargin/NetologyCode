@@ -1,16 +1,12 @@
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+//, UseInterceptors
 import { AppService } from './app.service';
-import { LoggingInterceptor } from './app.logging.interceptor';
-import { AuthService } from './auth/auth.service';
-import { UsersService } from './users/users.service';
-@UseInterceptors(LoggingInterceptor)
+//import { LoggingInterceptor } from './app.logging.interceptor';
+
+//@UseInterceptors(LoggingInterceptor)
 @Controller()
 export class AppController {
-  constructor(
-    private appService: AppService,
-    private authService: AuthService,
-    private usersService: UsersService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {

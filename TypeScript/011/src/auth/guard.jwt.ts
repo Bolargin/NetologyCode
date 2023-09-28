@@ -10,7 +10,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   public canActivate(context: ExecutionContext) {
     return super.canActivate(context);
   }
+
   public handleRequest(err, user) {
+    console.log('handleRequest ' + err + ' _ ' + user);
     if (err) {
       throw err;
     }

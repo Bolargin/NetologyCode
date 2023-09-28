@@ -7,6 +7,7 @@ import { BooksModule } from './books/books.module';
 import { BooksController } from './books/books.controller';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersController } from './users/users.controller';
 import { AuthController } from './auth/auth.controller';
 
 @Module({
@@ -17,7 +18,12 @@ import { AuthController } from './auth/auth.controller';
     UsersModule,
     AuthModule,
   ],
-  controllers: [AppController, BooksController, AuthController],
+  controllers: [
+    AppController,
+    BooksController,
+    UsersController,
+    AuthController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}

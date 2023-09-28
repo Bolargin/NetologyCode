@@ -2,7 +2,7 @@
 
 **Задание 1.**
 
-Создать модуль для регистрации (*signup*) и аутентификации (*signin*) пользователей (*AuthModule*).
+Создать модуль для регистрации (*signup* src\users\users.controller.ts) и аутентификации (*signin* NetologyCode\TypeScript\012\src\auth\auth.controller.ts) пользователей (*AuthModule*).
 После аутентификации пользователя необходимо генерировать **JSON Web Token (JWT)** и возвращать его на клиент.
 **JWT payload** должен содержать структуру данных:
 ```javascript
