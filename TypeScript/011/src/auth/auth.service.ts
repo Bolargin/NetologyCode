@@ -5,34 +5,38 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
+  authService: any;
   constructor(
     private readonly usersService: UsersService,
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.usersService.getUser({ username });
-    if (!user) return null;
-    const passwordValid = await bcrypt.compare(password, user.password);
-    if (!user) {
+  async login(user: any) {
+    console.log('login ' + user.email + ' ' + user.password);
+    const query = await this.usersService.getUser({ email: user.email });
+    console.log('login 01 ' + JSON.stringify(query));
+    if (!query) {
       throw new NotAcceptableException('could not find the user');
     }
-    if (user && passwordValid) {
-      return user;
+    const passwordValid = await bcrypt.compare(user.password, query.password);
+    if (!query) {
+      throw new NotAcceptableException('could not find the password');
     }
-    return null;
+    if (user && passwordValid) {
+      const payload = {
+        id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+      };
+      return {
+        access_token: this.jwtService.sign(payload),
+      };
+    }
   }
 
-  async login(user: any) {
-    console.log('login ' + user.username + ' ' + user._id);
-    const payload = { username: user.username, sub: user._id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
-
-  async validateEmail(username: string): Promise<any> {
-    const user = await this.usersService.getUser({ username });
+  async validateEmail(email: string): Promise<any> {
+    console.log('validateEmail ' + email);
+    const user = await this.usersService.getUser({ email: email });
     if (!user) {
       return null;
     }

@@ -9,14 +9,31 @@ export class UsersController {
 
   @Post('signup')
   async create(
+    @Body('email') email: string,
     @Body('password') password: string,
-    @Body('username') username: string,
+    @Body('firstName') firstName: string,
+    @Body('lastName') lastName: string,
   ): Promise<User> {
-    const user = await this.usersService.getUser({ username });
+    console.log(
+      'create ' +
+        email +
+        ' - ' +
+        password +
+        ' - ' +
+        firstName +
+        ' - ' +
+        lastName,
+    );
+    const user = await this.usersService.getUser({ email });
     if (user) return null;
     const saltOrRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-    const result = await this.usersService.createUser(username, hashedPassword);
+    const result = await this.usersService.createUser(
+      email,
+      hashedPassword,
+      firstName,
+      lastName,
+    );
     return result;
   }
 }

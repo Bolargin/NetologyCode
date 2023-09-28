@@ -6,15 +6,33 @@ import { User, UserDocument } from './users.schema';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<UserDocument>, //@InjectConnection() private connection: Connection,
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
   ) {}
-  async createUser(username: string, password: string): Promise<User> {
+  async createUser(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+  ): Promise<User> {
+    console.log(
+      'createUser ' +
+        email +
+        ' - ' +
+        password +
+        ' - ' +
+        firstName +
+        ' - ' +
+        lastName,
+    );
     return this.userModel.create({
-      username,
+      email,
       password,
+      firstName,
+      lastName,
     });
   }
   async getUser(query: object): Promise<User> {
+    console.log('getUser ' + JSON.stringify(query));
     return this.userModel.findOne(query);
   }
 }

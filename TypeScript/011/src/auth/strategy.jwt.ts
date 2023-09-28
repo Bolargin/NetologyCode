@@ -13,8 +13,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(query: any): Promise<any> {
-    console.log('validate ' + query.username);
-    const user = await this.authService.validateEmail(query.username);
+    console.log('validatejwt ' + JSON.stringify(query));
+    const user = await this.authService.validateEmail(query.email);
     if (!user) {
       throw new UnauthorizedException();
     }
